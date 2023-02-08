@@ -1,0 +1,23 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: debian:11
+    steps:
+      - checkout
+      - install_nim:
+          name: "Install nim"
+          command: "apt update && apt dist-upgrade -y && apt install -y nim"
+      - clone_project:
+          name: "Clone project"
+          command: "git clone https://github.com/lil-doudou/Proxmox_web_bruteforce.git"
+      - compile_program:
+          name: "Compile"
+          command: "nim compile -d:ssl Proxmox_web_bruteforce/run.nim"
+
+
+workflows:
+  build:
+    jobs:
+      - build
