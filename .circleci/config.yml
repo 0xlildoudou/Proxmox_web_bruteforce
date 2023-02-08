@@ -6,13 +6,13 @@ jobs:
       - image: debian:11
     steps:
       - checkout
-      - install_nim:
+      - run:
           name: "Install nim"
           command: "apt update && apt dist-upgrade -y && apt install -y nim"
-      - clone_project:
+      - run:
           name: "Clone project"
           command: "git clone https://github.com/lil-doudou/Proxmox_web_bruteforce.git"
-      - compile_program:
+      - run:
           name: "Compile"
           command: "nim compile -d:ssl Proxmox_web_bruteforce/run.nim"
 
